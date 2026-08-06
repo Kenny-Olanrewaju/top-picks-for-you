@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Picks For You</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64x64.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.png">
+    <meta name="description" content="Kenny's Store: everyday streetwear essentials and a curated luxury edit, shipped across Nigeria.">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="#" class="logo">Top Picks For You</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#main">Home</a></li>
+                <li><a href="#everyday">Everyday</a></li>
+                <li><a href="#luxury">Luxury Edit</a></li>
+                <li><a href="#footer-contact">Contact</a></li>
+                <li class="mobile-theme"><button id="themeToggleMobile" class="theme-btn" aria-label="Toggle Theme">🌙 Mode</button></li>
+            </ul>
+            <div class="nav-right">
+                <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+                    <span></span><span></span><span></span>
+                </button>
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">🌙 Mode</button>
+                <div class="cart-dropdown-wrapper">
+                    <button class="cart-icon" id="cartIcon" aria-label="Open cart" aria-expanded="false">
+                        🛒<span class="cart-count" id="cartCount" hidden>0</span>
+                    </button>
+                    <div class="cart-dropdown" id="cartDropdown" role="menu" aria-label="Cart contents">
+                        <p class="cart-empty">Your cart is empty.</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="limited-offer-header">
+        Today's offer ends in <span id="limited-offer-timer">01:00:00</span>
+    </div>
+
+    <main id="main">
+        <section class="hero">
+            <h1>Everyday Style. One Luxury Edit.</h1>
+            <p>Streetwear you'll actually wear, and a small curated edit for when you want to go further.</p>
+            <a href="#everyday" class="btn">Shop Everyday</a>
+        </section>
+
+        <!-- Everyday tier -->
+        <section id="everyday" aria-labelledby="everyday-heading">
+            <div class="section-header">
+                <p class="eyebrow">Everyday</p>
+                <h2 id="everyday-heading">Wear-Every-Day Essentials</h2>
+                <p>Sweats, sneakers and outerwear priced for regular rotation.</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card" style="animation-delay:0.05s">
+                    <img src="https://i.pinimg.com/1200x/97/53/4b/97534b76c1d8417d2e4226a22c7fbff9.jpg" alt="SOLY HUX oversized sweatshirt in charcoal grey">
+                    <div class="card-body">
+                        <h3>SOLY HUX Sweatshirt</h3>
+                        <p class="price">$65</p>
+                        <button class="add-to-cart" data-name="SOLY HUX Sweatshirt" data-price="65" data-currency="USD" data-img="images/soly-hux-sweatshirt.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.1s">
+                    <img src="https://i.pinimg.com/736x/ea/85/1f/ea851f8ed0673873616dc1d593264ba1.jpg" alt="Adidas Tubular X sneakers, black and white colourway">
+                    <div class="card-body">
+                        <h3>Adidas Tubular X</h3>
+                        <p class="price">$120</p>
+                        <button class="add-to-cart" data-name="Adidas Tubular X" data-price="120" data-currency="USD" data-img="images/adidas-tubular-x.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.15s">
+                    <img src="https://i.pinimg.com/1200x/b9/a3/ff/b9a3ffa7d7e3c1dd497753f8d41bc068.jpg" alt="LT casual tracksuit, matching top and bottoms">
+                    <div class="card-body">
+                        <h3>LT Casual Tracksuit</h3>
+                        <p class="price">$95</p>
+                        <button class="add-to-cart" data-name="LT Casual Tracksuit" data-price="95" data-currency="USD" data-img="images/lt-tracksuit.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.2s">
+                    <img src="https://i.pinimg.com/736x/c0/44/8f/c0448f27e72c4484124650826ef8c07e.jpg" alt="GORGLITTER men's letter varsity jacket">
+                    <div class="card-body">
+                        <h3>GORGLITTER Varsity Jacket</h3>
+                        <p class="price">$130</p>
+                        <button class="add-to-cart" data-name="GORGLITTER Varsity Jacket" data-price="130" data-currency="USD" data-img="images/gorglitter-jacket.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.25s">
+                    <img src="https://i.pinimg.com/736x/c0/44/8f/c0448f27e72c4484124650826ef8c07e.jpg" alt="Air Jordan 4 Retro sneakers">
+                    <div class="card-body">
+                        <h3>Air Jordan 4 Retro</h3>
+                        <p class="price">$210</p>
+                        <button class="add-to-cart" data-name="Air Jordan 4 Retro" data-price="210" data-currency="USD" data-img="images/air-jordan-4.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.3s">
+                    <img src="https://i.pinimg.com/736x/af/18/16/af1816dd30bf4cdbb91d47686490c448.jpg" alt="Nike Windrunner jacket">
+                    <div class="card-body">
+                        <h3>Nike Windrunner</h3>
+                        <p class="price">$95</p>
+                        <button class="add-to-cart" data-name="Nike Windrunner" data-price="95" data-currency="USD" data-img="images/nike-windrunner.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.35s">
+                    <img src="https://i.pinimg.com/736x/49/57/7e/49577e9346430cd75f8f69d3ae06665c.jpg" alt="Louis Vuitton baseball cap">
+                    <div class="card-body">
+                        <h3>LV-Style Baseball Cap</h3>
+                        <p class="price">$45</p>
+                        <button class="add-to-cart" data-name="LV-Style Baseball Cap" data-price="45" data-currency="USD" data-img="images/lv-cap.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.4s">
+                    <img src="https://i.pinimg.com/1200x/a1/28/91/a12891b135d5cdeca704bf179dfd127b.jpg" alt="Nike Zoom Fly 6 running shoes">
+                    <div class="card-body">
+                        <h3>Nike Zoom Fly 6</h3>
+                        <p class="price">$165</p>
+                        <button class="add-to-cart" data-name="Nike Zoom Fly 6" data-price="165" data-currency="USD" data-img="images/nike-zoom-fly-6.svg">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" style="animation-delay:0.45s">
+                    <img src="https://i.pinimg.com/736x/e0/22/4e/e0224e7ca65eda576c681bdec2949352.jpg" alt="Nike Club Fleece hoodie in heather grey">
+                    <div class="card-body">
+                        <h3>Nike Club Fleece Hoodie</h3>
+                        <p class="price">$65</p>
+                        <button class="add-to-cart" data-name="Nike Club Fleece Hoodie" data-price="65" data-currency="USD" data-img="images/nike-club-fleece.svg" data-pinterest-prompt="Nike Club Fleece hoodie heather grey flatlay, everyday streetwear outfit, minimal layering piece">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.5s">
+                    <img src="https://i.pinimg.com/1200x/d8/91/b6/d891b617d98bde74d5c2c7570823aee5.jpg" alt="Adidas Essentials 3-Stripes t-shirt in black">
+                    <div class="card-body">
+                        <h3>Adidas Essentials 3-Stripes Tee</h3>
+                        <p class="price">$28</p>
+                        <button class="add-to-cart" data-name="Adidas Essentials 3-Stripes Tee" data-price="28" data-currency="USD" data-img="images/adidas-essentials-tee.svg" data-pinterest-prompt="Adidas Essentials 3-Stripes t-shirt black, casual streetwear outfit, everyday wardrobe staple">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.55s">
+                    <img src="https://lscoglobal.scene7.com/is/image/lscoglobal/MB_00501-0114_GLO_CM_DA?fmt=webp&qlt=70&resMode=sharp2&fit=crop,1&op_usm=0.6,0.6,8&wid=480&hei=640" alt="Levi's 501 regular fit blue jeans on a hanger">
+                    <div class="card-body">
+                        <h3>Levi's 501 Original Jeans</h3>
+                        <p class="price">$75</p>
+                        <button class="add-to-cart" data-name="Levi's 501 Original Jeans" data-price="75" data-currency="USD" data-img="images/levis-501-jeans.svg" data-pinterest-prompt="Levi's 501 original fit jeans outfit, blue denim everyday look with sneakers and tee">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.6s">
+                    <img src="https://i.pinimg.com/1200x/2e/55/2c/2e552ca2a03f84bc3473179da9222629.jpg" alt="Uniqlo stretch chino pants in stone color">
+                    <div class="card-body">
+                        <h3>Uniqlo Ultra Stretch Chinos</h3>
+                        <p class="price">$39</p>
+                        <button class="add-to-cart" data-name="Uniqlo Ultra Stretch Chinos" data-price="39" data-currency="USD" data-img="images/uniqlo-chinos.svg" data-pinterest-prompt="Uniqlo ultra stretch chinos stone, everyday smart-casual urban outfit, minimal menswear">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.65s">
+                    <img src="https://i.pinimg.com/1200x/9e/4a/e8/9e4ae890ea196002139b7bae768e2bc3.jpg" alt="New Balance 574 sneakers in grey and navy">
+                    <div class="card-body">
+                        <h3>New Balance 574 Core</h3>
+                        <p class="price">$95</p>
+                        <button class="add-to-cart" data-name="New Balance 574 Core" data-price="95" data-currency="USD" data-img="images/nb-574.svg" data-pinterest-prompt="New Balance 574 grey navy sneakers, everyday casual sneaker outfit, retro running shoe photography">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.7s">
+                    <img src="https://i.pinimg.com/1200x/85/03/ba/8503ba1c7f707353699269182d3654b0.jpg" alt="Vans Old Skool sneakers with white side stripe">
+                    <div class="card-body">
+                        <h3>Vans Old Skool</h3>
+                        <p class="price">$70</p>
+                        <button class="add-to-cart" data-name="Vans Old Skool" data-price="70" data-currency="USD" data-img="images/vans-old-skool.svg" data-pinterest-prompt="Vans Old Skool sneakers black white, everyday skate style, casual streetwear shoes">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.75s">
+                    <img src="https://i.pinimg.com/1200x/51/af/fa/51affaed03bae5598e30fa8b4cc4545e.jpg" alt="Converse Chuck Taylor All Star high top sneakers in white">
+                    <div class="card-body">
+                        <h3>Converse Chuck Taylor</h3>
+                        <p class="price">$60</p>
+                        <button class="add-to-cart" data-name="Converse Chuck Taylor" data-price="60" data-currency="USD" data-img="images/converse-chuck-taylor.svg" data-pinterest-prompt="Converse Chuck Taylor white high tops, everyday streetwear style, classic canvas sneakers outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.8s">
+                    <img src="https://i.pinimg.com/1200x/9c/81/03/9c8103d2b2f7f58266a8e09905404947.jpg" alt="Patagonia P-6 logo t-shirt in navy blue">
+                    <div class="card-body">
+                        <h3>Patagonia P-6 Logo Tee</h3>
+                        <p class="price">$45</p>
+                        <button class="add-to-cart" data-name="Patagonia P-6 Logo Tee" data-price="45" data-currency="USD" data-img="images/patagonia-p6-tee.svg" data-pinterest-prompt="Patagonia P-6 logo t-shirt navy, everyday outdoor casual style, logo tee flat lay">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.85s">
+                    <img src="https://i.pinimg.com/1200x/f6/cc/68/f6cc6819d77f2322cc3865d27dd0f14e.jpg" alt="Carhartt WIP Chase trousers in olive green">
+                    <div class="card-body">
+                        <h3>Carhartt WIP Chase Trousers</h3>
+                        <p class="price">$80</p>
+                        <button class="add-to-cart" data-name="Carhartt WIP Chase Trousers" data-price="80" data-currency="USD" data-img="images/carhartt-chase-trousers.svg" data-pinterest-prompt="Carhartt WIP Chase trousers olive, everyday workwear-inspired outfit, casual chino style">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.9s">
+                    <img src="https://i.pinimg.com/1200x/9a/9d/17/9a9d17a6d9658200bc31dea52630426f.jpg" alt="The North Face 1996 Nuptse jacket in black">
+                    <div class="card-body">
+                        <h3>The North Face Nuptse Jacket</h3>
+                        <p class="price">$220</p>
+                        <button class="add-to-cart" data-name="The North Face Nuptse Jacket" data-price="220" data-currency="USD" data-img="images/tnf-nuptse.svg" data-pinterest-prompt="The North Face 1996 Nuptse jacket black, everyday cold-weather streetwear, puffer jacket outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.95s">
+                    <img src="https://i.pinimg.com/1200x/ee/a2/5e/eea25e396825b56d1c9a1a05eb68a778.jpg" alt="Champion Reverse Weave crewneck sweatshirt in grey">
+                    <div class="card-body">
+                        <h3>Champion Reverse Weave Crewneck</h3>
+                        <p class="price">$55</p>
+                        <button class="add-to-cart" data-name="Champion Reverse Weave Crewneck" data-price="55" data-currency="USD" data-img="images/champion-crewneck.svg" data-pinterest-prompt="Champion Reverse Weave crewneck grey, everyday lounge streetwear, vintage athletic sweatshirt">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1s">
+                    <img src="https://i.pinimg.com/1200x/fd/8a/e2/fd8ae200be25244277fd1cde825696cd.jpg" alt="Stüssy stock logo t-shirt in white">
+                    <div class="card-body">
+                        <h3>Stüssy Stock Logo Tee</h3>
+                        <p class="price">$58</p>
+                        <button class="add-to-cart" data-name="Stüssy Stock Logo Tee" data-price="58" data-currency="USD" data-img="images/stussy-stock-logo.svg" data-pinterest-prompt="Stüssy stock logo t-shirt white, everyday streetwear graphic tee, casual outfit inspiration">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.05s">
+                    <img src="https://i.pinimg.com/736x/ff/71/1a/ff711a31880f07cc1c23a7a0a51de131.jpg" alt="A.P.C. Petit New Standard jeans in dark indigo">
+                    <div class="card-body">
+                        <h3>A.P.C. Petit New Standard Jeans</h3>
+                        <p class="price">$180</p>
+                        <button class="add-to-cart" data-name="A.P.C. Petit New Standard Jeans" data-price="180" data-currency="USD" data-img="images/apc-petit-new-standard.svg" data-pinterest-prompt="A.P.C. Petit New Standard jeans dark indigo, everyday premium denim outfit, minimalist jean style">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.1s">
+                    <img src="https://i.pinimg.com/736x/e6/8a/31/e68a31d5db75a01d48b1fdff7d5b1b6d.jpg" alt="Reigning Champ midweight terry sweatpants in black">
+                    <div class="card-body">
+                        <h3>Reigning Champ Terry Sweatpants</h3>
+                        <p class="price">$110</p>
+                        <button class="add-to-cart" data-name="Reigning Champ Terry Sweatpants" data-price="110" data-currency="USD" data-img="images/reigning-champ-sweatpants.svg" data-pinterest-prompt="Reigning Champ midweight terry sweatpants black, everyday athleisure fit, premium lounge wear">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.15s">
+                    <img src="https://i.pinimg.com/736x/9d/6a/78/9d6a787cb7465d08ddc8c4ab4bb0f01d.jpg" alt="ASICS GEL-Quantum 360 running shoes in white and blue">
+                    <div class="card-body">
+                        <h3>ASICS GEL-Quantum 360</h3>
+                        <p class="price">$140</p>
+                        <button class="add-to-cart" data-name="ASICS GEL-Quantum 360" data-price="140" data-currency="USD" data-img="images/asics-gel-quantum-360.svg" data-pinterest-prompt="ASICS GEL-Quantum 360 white blue, everyday running shoe outfit, tech trainer streetwear">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.2s">
+                    <img src="https://i.pinimg.com/736x/20/19/0a/20190a8bd80d740efa5c14ca1f122430.jpg" alt="Timberland 6-Inch premium leather boots in wheat">
+                    <div class="card-body">
+                        <h3>Timberland 6-Inch Boots</h3>
+                        <p class="price">$190</p>
+                        <button class="add-to-cart" data-name="Timberland 6-Inch Boots" data-price="190" data-currency="USD" data-img="images/timberland-6-inch.svg" data-pinterest-prompt="Timberland 6-inch premium boots wheat, everyday rugged boot outfit, workwear inspired style">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.25s">
+                    <img src="https://i.pinimg.com/736x/16/31/3b/16313b3d90e3a8bf22dac0e3a3df12c0.jpg" alt="Oakley Holbrook sunglasses in polished black frame">
+                    <div class="card-body">
+                        <h3>Oakley Holbrook Sunglasses</h3>
+                        <p class="price">$120</p>
+                        <button class="add-to-cart" data-name="Oakley Holbrook Sunglasses" data-price="120" data-currency="USD" data-img="images/oakley-holbrook.svg" data-pinterest-prompt="Oakley Holbrook sunglasses black, everyday streetwear accessory, sunglasses fashion flatlay">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.3s">
+                    <img src="https://i.pinimg.com/736x/a5/f2/8f/a5f28fd7ff39812b48bf68d8d44f5a96.jpg" alt="Herschel Little America backpack in black">
+                    <div class="card-body">
+                        <h3>Herschel Little America Backpack</h3>
+                        <p class="price">$80</p>
+                        <button class="add-to-cart" data-name="Herschel Little America Backpack" data-price="80" data-currency="USD" data-img="images/herschel-backpack.svg" data-pinterest-prompt="Herschel Little America backpack black, everyday commuter bag, streetwear backpack outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.35s">
+                    <img src="https://i.pinimg.com/736x/ab/7f/6d/ab7f6dab1e13a12d2c10f2d17f3e1598.jpg" alt="Arc'teryx Covert Cardigan in black wool blend">
+                    <div class="card-body">
+                        <h3>Arc'teryx Covert Cardigan</h3>
+                        <p class="price">$250</p>
+                        <button class="add-to-cart" data-name="Arc'teryx Covert Cardigan" data-price="250" data-currency="USD" data-img="images/arcteryx-covert-cardigan.svg" data-pinterest-prompt="Arc'teryx Covert Cardigan black, everyday smart-casual layering, premium cardigan outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.4s">
+                    <img src="https://i.pinimg.com/736x/9f/42/be/9f42be22590bdb4318ea9184b0b3c5c3.jpg" alt="Patta Script cap in black with red logo embroidery">
+                    <div class="card-body">
+                        <h3>Patta Script Cap</h3>
+                        <p class="price">$45</p>
+                        <button class="add-to-cart" data-name="Patta Script Cap" data-price="45" data-currency="USD" data-img="images/patta-cap.svg" data-pinterest-prompt="Patta Script cap black red logo, everyday streetwear accessory, casual cap outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.45s">
+                    <img src="https://i.pinimg.com/736x/74/20/48/742048b5b691b5768ce3be19a46d6a0b.jpg" alt="Beams Plus white oxford shirt with button-down collar">
+                    <div class="card-body">
+                        <h3>Beams Plus Oxford Shirt</h3>
+                        <p class="price">$95</p>
+                        <button class="add-to-cart" data-name="Beams Plus Oxford Shirt" data-price="95" data-currency="USD" data-img="images/beams-plus-oxford.svg" data-pinterest-prompt="Beams Plus oxford shirt white, everyday layered shirt outfit, smart casual menswear">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.5s">
+                    <img src="https://i.pinimg.com/736x/0a/95/b2/0a95b2d2cd05b6eb1250f2e4e94ad717.jpg" alt="Filson wool watch cap in charcoal grey">
+                    <div class="card-body">
+                        <h3>Filson Wool Watch Cap</h3>
+                        <p class="price">$45</p>
+                        <button class="add-to-cart" data-name="Filson Wool Watch Cap" data-price="45" data-currency="USD" data-img="images/filson-watch-cap.svg" data-pinterest-prompt="Filson wool watch cap charcoal, everyday winter accessory, rugged outdoor hat look">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.55s">
+                    <img src="https://i.pinimg.com/736x/3c/29/97/3c2997d05a2a65e6f84b628fb04f9cd1.jpg" alt="Nike SB Dunk Low sneakers in black and white">
+                    <div class="card-body">
+                        <h3>Nike SB Dunk Low</h3>
+                        <p class="price">$110</p>
+                        <button class="add-to-cart" data-name="Nike SB Dunk Low" data-price="110" data-currency="USD" data-img="images/nike-sb-dunk-low.svg" data-pinterest-prompt="Nike SB Dunk Low black white, everyday skate sneaker look, classic dunk outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.6s">
+                    <img src="https://i.pinimg.com/736x/fb/1e/3d/fb1e3d0d4f7d411e942be1ad2b5bf5f1.jpg" alt="Adidas Samba OG sneakers in black leather">
+                    <div class="card-body">
+                        <h3>Adidas Samba OG</h3>
+                        <p class="price">$85</p>
+                        <button class="add-to-cart" data-name="Adidas Samba OG" data-price="85" data-currency="USD" data-img="images/adidas-samba-og.svg" data-pinterest-prompt="Adidas Samba OG black leather, everyday classic sneaker outfit, retro futsal shoe vibe">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.65s">
+                    <img src="https://i.pinimg.com/736x/27/8b/b3/278bb3a023d93ebdff7e293db5b9be2b.jpg" alt="Levi's Type III Trucker jacket in dark wash denim">
+                    <div class="card-body">
+                        <h3>Levi's Type III Trucker Jacket</h3>
+                        <p class="price">$95</p>
+                        <button class="add-to-cart" data-name="Levi's Type III Trucker Jacket" data-price="95" data-currency="USD" data-img="images/levis-trucker-jacket.svg" data-pinterest-prompt="Levi's Type III Trucker jacket dark wash, everyday denim jacket outfit, casual layering style">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.7s">
+                    <img src="https://i.pinimg.com/736x/a4/c6/6f/a4c66fffad5c3cea0f8a6e74e24c678a.jpg" alt="Norse Projects Nunk crew sweatshirt in oatmeal">
+                    <div class="card-body">
+                        <h3>Norse Projects Nunk Crew Sweatshirt</h3>
+                        <p class="price">$135</p>
+                        <button class="add-to-cart" data-name="Norse Projects Nunk Crew Sweatshirt" data-price="135" data-currency="USD" data-img="images/norse-projects-nunk.svg" data-pinterest-prompt="Norse Projects Nunk crew sweatshirt oatmeal, everyday minimalist streetwear, premium sweatshirt outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.75s">
+                    <img src="https://i.pinimg.com/736x/52/9d/58/529d585cd3dded9e87d37a63c8eaee26.jpg" alt="Blundstone 550 Chelsea boots in brown leather">
+                    <div class="card-body">
+                        <h3>Blundstone 550 Chelsea Boots</h3>
+                        <p class="price">$180</p>
+                        <button class="add-to-cart" data-name="Blundstone 550 Chelsea Boots" data-price="180" data-currency="USD" data-img="images/blundstone-550.svg" data-pinterest-prompt="Blundstone 550 Chelsea boots brown, everyday rugged boot outfit, casual menswear boot look">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.8s">
+                    <img src="https://i.pinimg.com/736x/9b/ea/26/9bea269c9e9e59356a287afbc136b7ac.jpg" alt="Barbour Bedale wax jacket in olive green">
+                    <div class="card-body">
+                        <h3>Barbour Bedale Wax Jacket</h3>
+                        <p class="price">$250</p>
+                        <button class="add-to-cart" data-name="Barbour Bedale Wax Jacket" data-price="250" data-currency="USD" data-img="images/barbour-bedale.svg" data-pinterest-prompt="Barbour Bedale wax jacket olive, everyday country jacket outfit, rugged workwear style">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.85s">
+                    <img src="https://i.pinimg.com/736x/4b/e1/3d/4be13dd110ddf304eb37a9434b4ffa7e.jpg" alt="Y-3 classic backpack in black nylon">
+                    <div class="card-body">
+                        <h3>Y-3 Classic Backpack</h3>
+                        <p class="price">$150</p>
+                        <button class="add-to-cart" data-name="Y-3 Classic Backpack" data-price="150" data-currency="USD" data-img="images/y3-classic-backpack.svg" data-pinterest-prompt="Y-3 classic backpack black, everyday luxury streetwear bag, minimalist backpack outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.9s">
+                    <img src="https://i.pinimg.com/736x/aa/3d/83/aa3d83eb1516752f527a1c3415c8d09f.jpg" alt="Patagonia Nano Puff vest in navy blue">
+                    <div class="card-body">
+                        <h3>Patagonia Nano Puff Vest</h3>
+                        <p class="price">$179</p>
+                        <button class="add-to-cart" data-name="Patagonia Nano Puff Vest" data-price="179" data-currency="USD" data-img="images/patagonia-nano-puff.svg" data-pinterest-prompt="Patagonia Nano Puff vest navy, everyday outdoor layering, lightweight insulated vest outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:1.95s">
+                    <img src="https://i.pinimg.com/736x/0a/8f/d2/0a8fd27e5e3b8c9b7896304f1cfa9fb7.jpg" alt="Patagonia Better Sweater fleece jacket in brown">
+                    <div class="card-body">
+                        <h3>Patagonia Better Sweater Jacket</h3>
+                        <p class="price">$139</p>
+                        <button class="add-to-cart" data-name="Patagonia Better Sweater Jacket" data-price="139" data-currency="USD" data-img="images/patagonia-better-sweater.svg" data-pinterest-prompt="Patagonia Better Sweater jacket brown, everyday cozy fleece outerwear, casual layering outfit">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:2s">
+                    <img src="https://i.pinimg.com/736x/67/f8/33/67f833d6e2a6df6eeb86f5f2fd9054d3.jpg" alt="Nike Club Fleece joggers in charcoal grey">
+                    <div class="card-body">
+                        <h3>Nike Club Fleece Joggers</h3>
+                        <p class="price">$55</p>
+                        <button class="add-to-cart" data-name="Nike Club Fleece Joggers" data-price="55" data-currency="USD" data-img="images/nike-club-fleece-joggers.svg" data-pinterest-prompt="Nike Club Fleece joggers charcoal, everyday athleisure outfit, comfy streetwear bottoms">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Luxury tier -->
+        <section id="luxury" class="luxury" aria-labelledby="luxury-heading">
+            <div class="section-header">
+                <p class="eyebrow">The Edit</p>
+                <h2 id="luxury-heading">Luxury Edit</h2>
+                <p>A small, rotating selection for statement pieces.</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card" style="animation-delay:0.05s">
+                    <img src="images/dior-backpack.svg" alt="Dior Oblique jacquard backpack">
+                    <div class="card-body">
+                        <h3>Dior Oblique Jacquard Backpack</h3>
+                        <p class="price">₦4,018,950</p>
+                        <button class="add-to-cart" data-name="Dior Oblique Jacquard Backpack" data-price="4018950" data-img="images/dior-backpack.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.1s">
+                    <img src="images/airpods-max.svg" alt="Apple AirPods Max headphones">
+                    <div class="card-body">
+                        <h3>Apple AirPods Max</h3>
+                        <p class="price">₦800,284</p>
+                        <button class="add-to-cart" data-name="Apple AirPods Max" data-price="800284" data-img="images/airpods-max.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.15s">
+                    <img src="images/versace-loafers.svg" alt="Versace loafers, leather with gold hardware">
+                    <div class="card-body">
+                        <h3>Versace Loafers</h3>
+                        <p class="price">₦49,000</p>
+                        <button class="add-to-cart" data-name="Versace Loafers" data-price="49000" data-img="images/versace-loafers.svg">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" style="animation-delay:0.2s">
+                    <img src="images/adidas-beckenbauer.svg" alt="Adidas Originals Beckenbauer tracksuit">
+                    <div class="card-body">
+                        <h3>Adidas Beckenbauer Tracksuit</h3>
+                        <p class="price">₦198,320</p>
+                        <button class="add-to-cart" data-name="Adidas Beckenbauer Tracksuit" data-price="198320" data-img="images/adidas-beckenbauer.svg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer-contact">
+        <p>Kenny's Store</p>
+        <p>&copy; 2026 Kenny's Store. All rights reserved. · <a href="mailto:hello@kennysstore.com">hello@kennysstore.com</a></p>
+    </footer>
+</body>
+</html>
