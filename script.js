@@ -63,10 +63,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const cartDropdown = document.getElementById('cartDropdown');
     const cartCount = document.getElementById('cartCount');
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const shopMoreSearch = document.getElementById('shopMoreSearch');
+    const categoryButtons = document.querySelectorAll('.category-button');
+    const shopCategorySections = document.querySelectorAll('.shop-category-section');
     const themeToggle = document.getElementById('themeToggle');
     const themeToggleMobile = document.getElementById('themeToggleMobile');
 
     const THEME_KEY = 'kennys_theme';
+    const CART_KEY = 'kennys_cart';
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
     function applyTheme(theme) {
@@ -117,31 +121,83 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initTheme();
 
-    /** @type {{name:string, price:number, img:string, qty:number}[]} */
+    /** @type {{name:string, price:number, img:string, qty:number, currency:string}[]} */
     let cart = [];
 
     const currencyFormatters = {
         NGN: (n) => '₦' + n.toLocaleString('en-NG'),
         USD: (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 }),
     };
+    const PROMO_CODE = 'KENNY10';
+    let promoActive = false;
+    let selectedCurrency = 'NGN';
+
+    const PAYMENT_OPTIONS = {
+        NGN: {
+            accountLine: '9057 951 109 • Opay transfer',
+            description: 'Local Naira payment',
+            exchangeRate: 1,
+        },
+        USD: {
+            accountLine: '001-234-567 • SWIFT: TOPPUS33',
+            description: 'International USD transfer',
+            exchangeRate: 1 / 430,
+        },
+    };
 
     function getFormatter(currency) {
         return currencyFormatters[currency] || currencyFormatters.NGN;
     }
 
+    function isValidCartItem(item) {
+        return (
+            item &&
+            typeof item.name === 'string' &&
+            item.name.trim().length > 0 &&
+            !Number.isNaN(Number(item.price)) &&
+            Number(item.price) >= 0 &&
+            Number(item.qty) > 0
+        );
+    }
+
+    function loadCart() {
+        try {
+            const stored = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            cart = Array.isArray(stored)
+                ? stored
+                      .filter(isValidCartItem)
+                      .map((item) => ({
+                          name: String(item.name).trim(),
+                          price: Number(item.price),
+                          qty: Number(item.qty),
+                          img: item.img || '',
+                          currency: item.currency || 'USD',
+                      }))
+                : [];
+        } catch (error) {
+            cart = [];
+        }
+    }
+
+    function saveCart() {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+
     function updateCartUI() {
-        // Badge
         const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-        if (totalItems > 0) {
-            cartCount.hidden = false;
+        if (cartCount) {
             cartCount.textContent = totalItems;
-        } else {
-            cartCount.hidden = true;
+            cartCount.hidden = totalItems === 0;
         }
 
-        // Dropdown content
+        if (!cartDropdown) {
+            saveCart();
+            return;
+        }
+
         if (cart.length === 0) {
             cartDropdown.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
+            saveCart();
             return;
         }
 
@@ -151,9 +207,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const lineTotal = item.price * item.qty;
             subtotal += lineTotal;
             const format = getFormatter(item.currency);
+            const cartImage = item.img || 'https://via.placeholder.com/80?text=No+Image';
             html += `
                 <div class="cart-item">
-                    <img src="${item.img}" alt="">
+                    <img src="${cartImage}" alt="${item.name}">
                     <div class="cart-item-info">
                         <span class="cart-item-name">${item.name}</span>
                         <span class="cart-item-price">${format(lineTotal)}</span>
@@ -168,14 +225,293 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         const subtotalFormat = getFormatter(cart[0]?.currency);
         html += `<div class="cart-total-row"><span>Subtotal</span><span>${subtotalFormat(subtotal)}</span></div>`;
+        html += `<div class="cart-actions"><a href="checkout.html" class="checkout-button">Proceed to Checkout</a></div>`;
         cartDropdown.innerHTML = html;
+        saveCart();
     }
+
+    function renderCheckoutPage() {
+        const checkoutList = document.getElementById('checkoutItems');
+        const subtotalCost = document.getElementById('checkoutSubtotalCost');
+        const shippingCost = document.getElementById('checkoutShippingCost');
+        const discountCost = document.getElementById('checkoutDiscountCost');
+        const totalCost = document.getElementById('checkoutTotalCost');
+        const itemCountBadge = document.getElementById('checkoutItemCount');
+        const emptyCartMessage = document.getElementById('emptyCartMessage');
+        const orderSection = document.getElementById('checkoutContent');
+        const confirmation = document.getElementById('checkoutConfirmation');
+        const shippingSpeed = document.getElementById('shippingSpeed');
+        const shippingNote = document.getElementById('shippingNote');
+        const deliveryEstimate = document.getElementById('deliveryEstimate');
+
+        if (!checkoutList || !subtotalCost || !shippingCost || !discountCost || !totalCost) return;
+
+        if (cart.length === 0) {
+            if (itemCountBadge) itemCountBadge.textContent = '0';
+            if (emptyCartMessage) emptyCartMessage.style.display = 'block';
+            if (orderSection) orderSection.style.display = 'none';
+            if (confirmation) confirmation.style.display = 'none';
+            return;
+        }
+
+        if (itemCountBadge) itemCountBadge.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+        if (emptyCartMessage) emptyCartMessage.style.display = 'none';
+        if (orderSection) orderSection.style.display = 'grid';
+
+        let subtotal = 0;
+        checkoutList.innerHTML = cart
+            .map((item, idx) => {
+                const lineTotal = item.price * item.qty;
+                subtotal += lineTotal;
+                const format = getFormatter(item.currency);
+                return `
+                    <div class="order-item">
+                        <img src="${item.img || 'https://via.placeholder.com/84?text=Item'}" alt="${item.name}">
+                        <div class="order-item-meta">
+                            <div class="order-item-name">${item.name}</div>
+                            <div class="order-item-details">${item.qty} × ${format(item.price)}</div>
+                            <div class="order-item-qty">
+                                Qty:
+                                <button type="button" class="qty-btn" data-action="dec" data-idx="${idx}" aria-label="Decrease quantity">−</button>
+                                <span>${item.qty}</span>
+                                <button type="button" class="qty-btn" data-action="inc" data-idx="${idx}" aria-label="Increase quantity">+</button>
+                            </div>
+                        </div>
+                        <div class="order-item-price">${format(lineTotal)}</div>
+                    </div>`;
+            })
+            .join('');
+
+        const shippingOption = shippingSpeed?.value || 'standard';
+        const shippingCosts = {
+            standard: 12,
+            express: 24,
+            priority: 39,
+        };
+        const shippingLabels = {
+            standard: '4–7 business days',
+            express: '2–3 business days',
+            priority: '1–2 business days',
+        };
+        const shipping = subtotal >= 2000 ? 0 : shippingCosts[shippingOption] || 12;
+        const discount = promoActive && subtotal >= 150 ? Math.round(subtotal * 0.1) : 0;
+        const total = subtotal + shipping - discount;
+
+        subtotalCost.textContent = getFormatter(cart[0]?.currency)(subtotal);
+        shippingCost.textContent = getFormatter(cart[0]?.currency)(shipping);
+        discountCost.textContent = getFormatter(cart[0]?.currency)(discount);
+        totalCost.textContent = getFormatter(cart[0]?.currency)(total);
+
+        if (shippingNote) {
+            shippingNote.textContent = subtotal >= 2000
+                ? 'Congratulations — shipping is free for premium orders.'
+                : 'Orders over $2,000 qualify for free shipping.';
+        }
+        if (deliveryEstimate) {
+            deliveryEstimate.textContent = `Estimated delivery: ${shippingLabels[shippingOption]}`;
+        }
+
+        if (confirmation) confirmation.style.display = 'none';
+    }
+
+    function attachCheckoutEvents() {
+        const checkoutList = document.getElementById('checkoutItems');
+        const checkoutForm = document.getElementById('checkoutForm');
+        const confirmation = document.getElementById('checkoutConfirmation');
+        const orderSection = document.getElementById('checkoutContent');
+        const promoApply = document.getElementById('promoApply');
+        const promoCode = document.getElementById('promoCode');
+        const promoMessage = document.getElementById('promoMessage');
+        const shippingSpeed = document.getElementById('shippingSpeed');
+
+        if (checkoutList) {
+            checkoutList.addEventListener('click', function (e) {
+                const button = e.target.closest('button[data-action]');
+                if (!button) return;
+                const idx = Number(button.dataset.idx);
+                const action = button.dataset.action;
+                if (action === 'inc') cart[idx].qty += 1;
+                if (action === 'dec') {
+                    cart[idx].qty -= 1;
+                    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+                }
+                saveCart();
+                updateCartUI();
+                renderCheckoutPage();
+            });
+        }
+
+        const paymentInstructions = document.getElementById('paymentInstructions');
+        const nairaCard = document.getElementById('nairaCard');
+        const usdCard = document.getElementById('usdCard');
+        const paymentAmount = document.getElementById('paymentAmount');
+        const bankAccount = document.getElementById('bankAccount');
+        const paymentReference = document.getElementById('paymentReference');
+        const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+        const paymentModal = document.getElementById('paymentModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        if (promoApply && promoCode && promoMessage) {
+            promoApply.addEventListener('click', function () {
+                const code = promoCode.value.trim().toUpperCase();
+                const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+                const valid = code === PROMO_CODE;
+                const meetsThreshold = subtotal >= 150;
+
+                if (valid && meetsThreshold) {
+                    promoActive = true;
+                    promoMessage.textContent = 'Promo code applied. You saved 10% on your order.';
+                    promoMessage.style.color = '#1d6a47';
+                } else if (valid) {
+                    promoActive = false;
+                    promoMessage.textContent = 'Spend $150 or more to activate KENNY10.';
+                    promoMessage.style.color = '#c77d5e';
+                } else {
+                    promoActive = false;
+                    promoMessage.textContent = 'Invalid promo code. Try KENNY10 for 10% off orders over $150.';
+                    promoMessage.style.color = '#b23b3b';
+                }
+                renderCheckoutPage();
+                if (paymentInstructions && paymentInstructions.style.display !== 'none') {
+                    updatePaymentCards();
+                }
+            });
+        }
+
+        if (shippingSpeed) {
+            shippingSpeed.addEventListener('change', function () {
+                renderCheckoutPage();
+                if (paymentInstructions && paymentInstructions.style.display !== 'none') {
+                    updatePaymentCards();
+                }
+            });
+        }
+
+        function calculateOrderSummary() {
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const shippingOption = shippingSpeed?.value || 'standard';
+            const shippingCosts = {
+                standard: 12,
+                express: 24,
+                priority: 39,
+            };
+            const shipping = subtotal >= 2000 ? 0 : shippingCosts[shippingOption] || 12;
+            const discount = promoActive && subtotal >= 150 ? Math.round(subtotal * 0.1) : 0;
+            const total = subtotal + shipping - discount;
+            return {
+                subtotal,
+                shipping,
+                discount,
+                total,
+                baseCurrency: cart[0]?.currency || 'NGN',
+            };
+        }
+
+        function getPaymentReference() {
+            return `TOPPICK-${selectedCurrency}-${Math.floor(Date.now() / 1000)}`;
+        }
+
+        function updatePaymentCards() {
+            if (!paymentAmount || !bankAccount || !paymentReference) return;
+            const { total, baseCurrency } = calculateOrderSummary();
+            const details = PAYMENT_OPTIONS[selectedCurrency] || PAYMENT_OPTIONS.NGN;
+            let convertedAmount = total;
+            if (selectedCurrency !== baseCurrency) {
+                convertedAmount = selectedCurrency === 'USD'
+                    ? Number((total * details.exchangeRate).toFixed(2))
+                    : Math.round(total / PAYMENT_OPTIONS.USD.exchangeRate);
+            }
+            paymentAmount.textContent = getFormatter(selectedCurrency)(convertedAmount);
+            bankAccount.textContent = details.accountLine;
+            paymentReference.textContent = getPaymentReference();
+        }
+
+        function refreshCurrencySelection() {
+            [nairaCard, usdCard].forEach((button) => {
+                if (!button) return;
+                button.classList.toggle('selected', button.dataset.currency === selectedCurrency);
+            });
+        }
+
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (cart.length === 0) return;
+                promoActive = false;
+                if (checkoutForm) checkoutForm.style.display = 'none';
+                if (paymentInstructions) {
+                    paymentInstructions.style.display = 'grid';
+                    refreshCurrencySelection();
+                    updatePaymentCards();
+                }
+                if (promoMessage) {
+                    promoMessage.textContent = 'Review payment details below to complete your order.';
+                    promoMessage.style.color = 'var(--muted-text)';
+                }
+                if (confirmation) confirmation.style.display = 'none';
+                window.scrollTo({ top: paymentInstructions?.offsetTop ? paymentInstructions.offsetTop - 20 : 0, behavior: 'smooth' });
+            });
+        }
+
+        [nairaCard, usdCard].forEach((button) => {
+            button?.addEventListener('click', function () {
+                selectedCurrency = button.dataset.currency || 'NGN';
+                refreshCurrencySelection();
+                updatePaymentCards();
+            });
+        });
+
+        if (confirmPaymentBtn) {
+            confirmPaymentBtn.addEventListener('click', function () {
+                if (cart.length === 0) return;
+                cart = [];
+                saveCart();
+                updateCartUI();
+                if (paymentInstructions) paymentInstructions.style.display = 'none';
+                if (confirmation) {
+                    confirmation.innerHTML = `
+                        <h2>Your payment is verified</h2>
+                        <p>We have received confirmation of your transfer. Your order is being processed and will be shipped according to your selected delivery option.</p>
+                        <a href="index.html" class="btn">Return to Shop</a>`;
+                    confirmation.style.display = 'block';
+                }
+                if (paymentModal) paymentModal.style.display = 'grid';
+            });
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', function () {
+                if (paymentModal) paymentModal.style.display = 'none';
+                window.location.href = 'index.html';
+            });
+        }
+
+        if (paymentModal) {
+            paymentModal.addEventListener('click', function (event) {
+                if (event.target === paymentModal) {
+                    paymentModal.style.display = 'none';
+                }
+            });
+        }
+    }
+
+    loadCart();
+    updateCartUI();
+    renderCheckoutPage();
+    attachCheckoutEvents();
+
+    window.addEventListener('pageshow', function () {
+        loadCart();
+        updateCartUI();
+        renderCheckoutPage();
+    });
 
     addToCartButtons.forEach((btn) => {
         btn.addEventListener('click', function () {
             const name = btn.dataset.name;
             const price = Number(btn.dataset.price);
-            const img = btn.dataset.img;
+            const cardImage = btn.closest('.product-card')?.querySelector('img')?.src;
+            const img = cardImage || btn.dataset.img || '';
             const currency = btn.dataset.currency || 'NGN';
 
             const existing = cart.find((item) => item.name === name && item.currency === currency);
@@ -199,6 +535,40 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 1200);
         });
     });
+
+    function updateShopPreview() {
+        const query = shopMoreSearch?.value.trim().toLowerCase() || '';
+        const activeCategory = document.querySelector('.category-button.active')?.dataset.filter || 'all';
+
+        document.querySelectorAll('.shop-more-card').forEach((card) => {
+            const label = card.querySelector('h3')?.textContent.toLowerCase() || '';
+            const category = card.dataset.category || '';
+            const matchesCategory = activeCategory === 'all' || category === activeCategory;
+            const matchesQuery = query === '' || label.includes(query) || category.includes(query);
+            card.style.display = matchesCategory && matchesQuery ? 'block' : 'none';
+        });
+
+        document.querySelectorAll('.shop-category-section').forEach((section) => {
+            const category = section.dataset.category;
+            section.classList.toggle('active', activeCategory === 'all' || category === activeCategory);
+        });
+    }
+
+    if (shopMoreSearch) {
+        shopMoreSearch.addEventListener('input', updateShopPreview);
+    }
+
+    categoryButtons.forEach((button) => {
+        button.addEventListener('click', function () {
+            categoryButtons.forEach((btn) => {
+                btn.classList.toggle('active', btn === button);
+                btn.setAttribute('aria-selected', String(btn === button));
+            });
+            updateShopPreview();
+        });
+    });
+
+    updateShopPreview();
 
     cartDropdown.addEventListener('click', function (e) {
         const target = e.target.closest('button[data-action]');

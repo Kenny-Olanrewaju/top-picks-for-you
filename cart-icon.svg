@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="navyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12294a"/>
+      <stop offset="100%" stop-color="#0b1f3a"/>
+    </linearGradient>
+    <linearGradient id="goldStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3d9a8"/>
+      <stop offset="45%" stop-color="#c9a66b"/>
+      <stop offset="100%" stop-color="#9c7a45"/>
+    </linearGradient>
+    <linearGradient id="goldFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e4d3ae"/>
+      <stop offset="100%" stop-color="#c9a66b"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="35%" cy="25%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Navy badge circle -->
+  <circle cx="100" cy="100" r="96" fill="url(#navyBg)" stroke="url(#goldStroke)" stroke-width="2.5"/>
+  <circle cx="100" cy="100" r="96" fill="url(#sheen)"/>
+
+  <!-- Thin inner ring for a premium double-border look -->
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#c9a66b" stroke-width="0.75" stroke-opacity="0.45"/>
+
+  <!-- Cart body -->
+  <g stroke="url(#goldStroke)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Handle -->
+    <path d="M56 60 L68 60 L82 118 L142 118 L152 78 L76 78"/>
+    <!-- Basket front weave lines -->
+    <line x1="86" y1="90" x2="140" y2="90" stroke-width="4.5" stroke-opacity="0.8"/>
+    <line x1="88" y1="103" x2="136" y2="103" stroke-width="4.5" stroke-opacity="0.8"/>
+  </g>
+
+  <!-- Wheels -->
+  <circle cx="94" cy="134" r="10" fill="url(#goldFill)"/>
+  <circle cx="94" cy="134" r="10" fill="none" stroke="#0b1f3a" stroke-width="2" stroke-opacity="0.4"/>
+  <circle cx="130" cy="134" r="10" fill="url(#goldFill)"/>
+  <circle cx="130" cy="134" r="10" fill="none" stroke="#0b1f3a" stroke-width="2" stroke-opacity="0.4"/>
+
+  <!-- Small sparkle accents for a premium touch -->
+  <g fill="#e4d3ae" opacity="0.9">
+    <path d="M150 52 L152 58 L158 60 L152 62 L150 68 L148 62 L142 60 L148 58 Z"/>
+    <circle cx="60" cy="46" r="2.2"/>
+  </g>
+</svg>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop More - Top Picks For You</title>
+    <link rel="icon" type="image/svg+xml" href="cart-icon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="logo"><img src="cart-icon.svg" alt="" style="width:35px; height: 28px;">Top Picks For You</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#everyday">Everyday</a></li>
+                <li><a href="index.html#luxury">Luxury Edit</a></li>
+                <li><a href="shop-more.html">Shop More</a></li>
+                <li><a href="index.html#footer-contact">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="checkout.html" class="btn">Checkout</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-header">
+            <p class="eyebrow">Browse</p>
+            <h2>Shop More</h2>
+            <p>Explore categories and discover more products curated for you.</p>
+        </section>
+
+        <section class="shop-more-shell">
+            <div class="shop-more-controls">
+                <input id="shopMoreSearch" class="search-bar" type="search" placeholder="Search products, styles, brands..." autocomplete="off">
+                <div class="category-nav" role="tablist" aria-label="Product categories">
+                    <button type="button" class="category-button active" data-filter="all" role="tab" aria-selected="true">All</button>
+                    <button type="button" class="category-button" data-filter="men" role="tab">Men</button>
+                    <button type="button" class="category-button" data-filter="women" role="tab">Women</button>
+                    <button type="button" class="category-button" data-filter="children" role="tab">Children</button>
+                    <button type="button" class="category-button" data-filter="accessories" role="tab">Accessories</button>
+                </div>
+            </div>
+
+            <div class="shop-category-section active" data-category="men">
+                <div class="section-heading-row">
+                    <h3>Men's Wear</h3>
+                    <p>Smart essentials and modern tailoring for everyday rotation.</p>
+                </div>
+                <div class="product-grid">
+                    <!-- Ten men products (use same structure as index) -->
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?mens-jacket" alt="Meridian bomber jacket in navy blue">
+                        <div class="card-body">
+                            <h3>Meridian Bomber Jacket</h3>
+                            <p class="price">$128</p>
+                            <button class="add-to-cart" data-name="Meridian Bomber Jacket" data-price="128" data-currency="USD" data-img="https://source.unsplash.com/featured/?mens-jacket">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?mens-polo" alt="Cashmere rib polo in soft grey">
+                        <div class="card-body">
+                            <h3>Cashmere Rib Polo</h3>
+                            <p class="price">$88</p>
+                            <button class="add-to-cart" data-name="Cashmere Rib Polo" data-price="88" data-currency="USD" data-img="https://source.unsplash.com/featured/?mens-polo">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?denim-jacket" alt="Stonewashed denim jacket in indigo">
+                        <div class="card-body">
+                            <h3>Stonewashed Denim Jacket</h3>
+                            <p class="price">$112</p>
+                            <button class="add-to-cart" data-name="Stonewashed Denim Jacket" data-price="112" data-currency="USD" data-img="https://source.unsplash.com/featured/?denim-jacket">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?cargo-pants" alt="Utility cargo pants with slim fit">
+                        <div class="card-body">
+                            <h3>Utility Cargo Pants</h3>
+                            <p class="price">$74</p>
+                            <button class="add-to-cart" data-name="Utility Cargo Pants" data-price="74" data-currency="USD" data-img="https://source.unsplash.com/featured/?cargo-pants">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?chelsea-boots" alt="Suede Chelsea boots in brown leather">
+                        <div class="card-body">
+                            <h3>Suede Chelsea Boots</h3>
+                            <p class="price">$145</p>
+                            <button class="add-to-cart" data-name="Suede Chelsea Boots" data-price="145" data-currency="USD" data-img="https://source.unsplash.com/featured/?chelsea-boots">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?suit-jacket" alt="Tailored blazer in charcoal grey">
+                        <div class="card-body">
+                            <h3>Tailored Blazer</h3>
+                            <p class="price">$185</p>
+                            <button class="add-to-cart" data-name="Tailored Blazer" data-price="185" data-currency="USD" data-img="https://source.unsplash.com/featured/?suit-jacket">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?merino-sweater" alt="Merino crew sweater in cream">
+                        <div class="card-body">
+                            <h3>Merino Crew Sweater</h3>
+                            <p class="price">$98</p>
+                            <button class="add-to-cart" data-name="Merino Crew Sweater" data-price="98" data-currency="USD" data-img="https://source.unsplash.com/featured/?merino-sweater">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?wool-coat" alt="Herringbone wool coat in navy">
+                        <div class="card-body">
+                            <h3>Herringbone Wool Coat</h3>
+                            <p class="price">$215</p>
+                            <button class="add-to-cart" data-name="Herringbone Wool Coat" data-price="215" data-currency="USD" data-img="https://source.unsplash.com/featured/?wool-coat">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?mockneck-tee" alt="Black mockneck T-shirt">
+                        <div class="card-body">
+                            <h3>Mockneck T-Shirt</h3>
+                            <p class="price">$42</p>
+                            <button class="add-to-cart" data-name="Mockneck T-Shirt" data-price="42" data-currency="USD" data-img="https://source.unsplash.com/featured/?mockneck-tee">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="men">
+                        <img src="https://source.unsplash.com/featured/?silk-shirt" alt="Camp collar silk shirt in cream">
+                        <div class="card-body">
+                            <h3>Camp Collar Silk Shirt</h3>
+                            <p class="price">$120</p>
+                            <button class="add-to-cart" data-name="Camp Collar Silk Shirt" data-price="120" data-currency="USD" data-img="https://source.unsplash.com/featured/?silk-shirt">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women section (10 products) -->
+            <div class="shop-category-section" data-category="women">
+                <div class="section-heading-row">
+                    <h3>Women's Wear</h3>
+                    <p>Contemporary essentials, evening-ready dresses and elevated separates.</p>
+                </div>
+                <div class="product-grid">
+                    <!-- Ten women products -->
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?silk-dress" alt="Silk slip dress in ivory">
+                        <div class="card-body">
+                            <h3>Silk Slip Dress</h3>
+                            <p class="price">$178</p>
+                            <button class="add-to-cart" data-name="Silk Slip Dress" data-price="178" data-currency="USD" data-img="https://source.unsplash.com/featured/?silk-dress">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?satin-blouse" alt="Satin wrap shirt in blush pink">
+                        <div class="card-body">
+                            <h3>Satin Wrap Shirt</h3>
+                            <p class="price">$94</p>
+                            <button class="add-to-cart" data-name="Satin Wrap Shirt" data-price="94" data-currency="USD" data-img="https://source.unsplash.com/featured/?satin-blouse">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?wide-leg-trousers" alt="Wide leg tailored trousers in cream">
+                        <div class="card-body">
+                            <h3>Wide Leg Tailored Trousers</h3>
+                            <p class="price">$132</p>
+                            <button class="add-to-cart" data-name="Wide Leg Tailored Trousers" data-price="132" data-currency="USD" data-img="https://source.unsplash.com/featured/?wide-leg-trousers">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?leather-jacket-women" alt="Leather moto jacket in black">
+                        <div class="card-body">
+                            <h3>Leather Moto Jacket</h3>
+                            <p class="price">$198</p>
+                            <button class="add-to-cart" data-name="Leather Moto Jacket" data-price="198" data-currency="USD" data-img="https://source.unsplash.com/featured/?leather-jacket-women">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?knit-cardigan" alt="Statement knit cardigan in oatmeal">
+                        <div class="card-body">
+                            <h3>Statement Knit Cardi</h3>
+                            <p class="price">$98</p>
+                            <button class="add-to-cart" data-name="Statement Knit Cardi" data-price="98" data-currency="USD" data-img="https://source.unsplash.com/featured/?knit-cardigan">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?platform-mules" alt="Platform mules in tan leather">
+                        <div class="card-body">
+                            <h3>Platform Mules</h3>
+                            <p class="price">$110</p>
+                            <button class="add-to-cart" data-name="Platform Mules" data-price="110" data-currency="USD" data-img="https://source.unsplash.com/featured/?platform-mules">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?pleated-skirt" alt="Pleated midi skirt in ivory">
+                        <div class="card-body">
+                            <h3>Pleated Midi Skirt</h3>
+                            <p class="price">$84</p>
+                            <button class="add-to-cart" data-name="Pleated Midi Skirt" data-price="84" data-currency="USD" data-img="https://source.unsplash.com/featured/?pleated-skirt">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?cashmere-scarf" alt="Cashmere scarf in oatmeal">
+                        <div class="card-body">
+                            <h3>Cashmere Scarf</h3>
+                            <p class="price">$78</p>
+                            <button class="add-to-cart" data-name="Cashmere Scarf" data-price="78" data-currency="USD" data-img="https://source.unsplash.com/featured/?cashmere-scarf">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?mini-bag" alt="Embellished mini bag in pearl white">
+                        <div class="card-body">
+                            <h3>Embellished Mini Bag</h3>
+                            <p class="price">$135</p>
+                            <button class="add-to-cart" data-name="Embellished Mini Bag" data-price="135" data-currency="USD" data-img="https://source.unsplash.com/featured/?mini-bag">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="women">
+                        <img src="https://source.unsplash.com/featured/?maxi-dress" alt="Floral maxi dress with soft drape">
+                        <div class="card-body">
+                            <h3>Floral Maxi Dress</h3>
+                            <p class="price">$148</p>
+                            <button class="add-to-cart" data-name="Floral Maxi Dress" data-price="148" data-currency="USD" data-img="https://source.unsplash.com/featured/?maxi-dress">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Children section (10 products) -->
+            <div class="shop-category-section" data-category="children">
+                <div class="section-heading-row">
+                    <h3>Children's Wear</h3>
+                    <p>Comfort-first pieces made to keep the little ones moving and styled.</p>
+                </div>
+                <div class="product-grid">
+                    <!-- Ten children products -->
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?kids-jacket" alt="Mini denim jacket for kids">
+                        <div class="card-body">
+                            <h3>Mini Denim Jacket</h3>
+                            <p class="price">$45</p>
+                            <button class="add-to-cart" data-name="Mini Denim Jacket" data-price="45" data-currency="USD" data-img="https://source.unsplash.com/featured/?kids-jacket">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?kids-hoodie" alt="Logo hoodie for children">
+                        <div class="card-body">
+                            <h3>Logo Hoodie</h3>
+                            <p class="price">$32</p>
+                            <button class="add-to-cart" data-name="Logo Hoodie" data-price="32" data-currency="USD" data-img="https://source.unsplash.com/featured/?kids-hoodie">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?kids-joggers" alt="Cargo joggers for kids">
+                        <div class="card-body">
+                            <h3>Cargo Joggers</h3>
+                            <p class="price">$28</p>
+                            <button class="add-to-cart" data-name="Cargo Joggers" data-price="28" data-currency="USD" data-img="https://source.unsplash.com/featured/?kids-joggers">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?kids-knit-set" alt="Knit set with sweater and pants">
+                        <div class="card-body">
+                            <h3>Knit Set</h3>
+                            <p class="price">$38</p>
+                            <button class="add-to-cart" data-name="Knit Set" data-price="38" data-currency="USD" data-img="https://source.unsplash.com/featured/?kids-knit-set">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?kids-tshirt" alt="Cartoon graphic tee for kids">
+                        <div class="card-body">
+                            <h3>Cartoon Graphic Tee</h3>
+                            <p class="price">$22</p>
+                            <button class="add-to-cart" data-name="Cartoon Graphic Tee" data-price="22" data-currency="USD" data-img="https://source.unsplash.com/featured/?kids-tshirt">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?kids-sneakers" alt="High-top sneakers for kids">
+                        <div class="card-body">
+                            <h3>High-Top Sneakers</h3>
+                            <p class="price">$48</p>
+                            <button class="add-to-cart" data-name="High-Top Sneakers" data-price="48" data-currency="USD" data-img="https://source.unsplash.com/featured/?kids-sneakers">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?kids-vest" alt="Puffer vest for children">
+                        <div class="card-body">
+                            <h3>Puffer Vest</h3>
+                            <p class="price">$42</p>
+                            <button class="add-to-cart" data-name="Puffer Vest" data-price="42" data-currency="USD" data-img="https://source.unsplash.com/featured/?kids-vest">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?snapback-kids" alt="Checkered snapback for kids">
+                        <div class="card-body">
+                            <h3>Checkered Snapback</h3>
+                            <p class="price">$18</p>
+                            <button class="add-to-cart" data-name="Checkered Snapback" data-price="18" data-currency="USD" data-img="https://source.unsplash.com/featured/?snapback-kids">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?kids-slippers" alt="Cozy slippers for children">
+                        <div class="card-body">
+                            <h3>Cozy Slippers</h3>
+                            <p class="price">$20</p>
+                            <button class="add-to-cart" data-name="Cozy Slippers" data-price="20" data-currency="USD" data-img="https://source.unsplash.com/featured/?kids-slippers">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="children">
+                        <img src="https://source.unsplash.com/featured/?romper" alt="Stripe romper for kids">
+                        <div class="card-body">
+                            <h3>Stripe Romper</h3>
+                            <p class="price">$26</p>
+                            <button class="add-to-cart" data-name="Stripe Romper" data-price="26" data-currency="USD" data-img="https://source.unsplash.com/featured/?romper">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accessories section (10 products) -->
+            <div class="shop-category-section" data-category="accessories">
+                <div class="section-heading-row">
+                    <h3>Accessories</h3>
+                    <p>Elegant finishing pieces that complete every look.</p>
+                </div>
+                <div class="product-grid">
+                    <!-- Ten accessories products -->
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?sunglasses" alt="Sleek aviator sunglasses in black">
+                        <div class="card-body">
+                            <h3>Aviator Sunglasses</h3>
+                            <p class="price">$95</p>
+                            <button class="add-to-cart" data-name="Aviator Sunglasses" data-price="95" data-currency="USD" data-img="https://source.unsplash.com/featured/?sunglasses">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?wallet" alt="Leather wallet with card slots">
+                        <div class="card-body">
+                            <h3>Leather Wallet</h3>
+                            <p class="price">$72</p>
+                            <button class="add-to-cart" data-name="Leather Wallet" data-price="72" data-currency="USD" data-img="https://source.unsplash.com/featured/?wallet">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?hoop-earrings" alt="Gold hoop earrings set">
+                        <div class="card-body">
+                            <h3>Gold Hoop Earrings</h3>
+                            <p class="price">$68</p>
+                            <button class="add-to-cart" data-name="Gold Hoop Earrings" data-price="68" data-currency="USD" data-img="https://source.unsplash.com/featured/?hoop-earrings">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?leather-belt" alt="Italian leather belt in black">
+                        <div class="card-body">
+                            <h3>Leather Belt</h3>
+                            <p class="price">$58</p>
+                            <button class="add-to-cart" data-name="Leather Belt" data-price="58" data-currency="USD" data-img="https://source.unsplash.com/featured/?leather-belt">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?tech-organizer" alt="Compact tech organizer pouch">
+                        <div class="card-body">
+                            <h3>Tech Organizer</h3>
+                            <p class="price">$48</p>
+                            <button class="add-to-cart" data-name="Tech Organizer" data-price="48" data-currency="USD" data-img="https://source.unsplash.com/featured/?tech-organizer">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?duffle-bag" alt="Travel duffle bag in leatherette">
+                        <div class="card-body">
+                            <h3>Travel Duffle</h3>
+                            <p class="price">$125</p>
+                            <button class="add-to-cart" data-name="Travel Duffle" data-price="125" data-currency="USD" data-img="https://source.unsplash.com/featured/?duffle-bag">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?beanie" alt="Ribbed beanie in charcoal grey">
+                        <div class="card-body">
+                            <h3>Ribbed Beanie</h3>
+                            <p class="price">$32</p>
+                            <button class="add-to-cart" data-name="Ribbed Beanie" data-price="32" data-currency="USD" data-img="https://source.unsplash.com/featured/?beanie">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?pocket-square" alt="Silk pocket square in blue print">
+                        <div class="card-body">
+                            <h3>Silk Pocket Square</h3>
+                            <p class="price">$29</p>
+                            <button class="add-to-cart" data-name="Silk Pocket Square" data-price="29" data-currency="USD" data-img="https://source.unsplash.com/featured/?pocket-square">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card shop-more-card" data-category="accessories">
+                        <img src="https://source.unsplash.com/featured/?watch-strap" alt="Premium leather watch strap">
+                        <div class="card-body">
+                            <h3>Smartwatch Strap</h3>
+                            <p class="price">$40</p>
+                            <button class="add-to-cart" data-name="Smartwatch Strap" data-price="40" data-currency="USD" data-img="https://source.unsplash.com/featured/?watch-strap">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer-contact">
+        <p>Top Picks For You</p>
+        <p>&copy; 2026 Kenny's Store. All rights reserved.</p>
+    </footer>
+
+    <script defer src="script.js"></script>
+</body>
+</html>
