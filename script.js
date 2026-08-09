@@ -540,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // IMPORTANT: replace this with the store's real WhatsApp Business number,
     // in international format, digits only (no "+", no leading 0).
     // Example: a Nigerian number 080-XXX-XXXX becomes "234XXXXXXXXXX".
-    const WHATSAPP_NUMBER = '234XXXXXXXXXX';
+    const WHATSAPP_NUMBER = '2349049357967';
 
     function buildWhatsAppLink(message) {
         return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
