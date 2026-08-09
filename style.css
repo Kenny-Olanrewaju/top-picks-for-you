@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -1225,4 +1223,173 @@ footer a { text-decoration: underline; color: var(--amber); }
 @media screen and (max-width: 800px) {
     .mobile-theme { display: block; }
     
+}
+
+/* ---------- Product description modal ---------- */
+.product-modal-overlay {
+    z-index: 998;
+}
+.product-modal-panel {
+    width: min(640px, 100%);
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+    text-align: left;
+    align-items: start;
+    padding: 28px;
+    position: relative;
+}
+.product-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: var(--surface-alt);
+    color: var(--text);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+.product-modal-close:hover,
+.product-modal-close:focus-visible {
+    background: var(--border);
+}
+.product-modal-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    background: var(--surface-alt);
+}
+.product-modal-info {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+}
+.product-modal-info h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin: 0;
+    padding-right: 30px;
+}
+.product-modal-price {
+    font-weight: 700;
+    color: var(--amber-dark);
+    font-size: 1.15rem;
+}
+.product-modal-desc {
+    color: var(--muted-text);
+    line-height: 1.7;
+    margin: 0;
+}
+.product-modal-actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 8px;
+}
+.product-modal-actions .btn {
+    width: 100%;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+.whatsapp-btn {
+    background-color: #25D366;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.whatsapp-btn:hover,
+.whatsapp-btn:focus-visible {
+    background-color: #1fb257;
+    color: #ffffff;
+}
+.has-product-modal {
+    cursor: pointer;
+}
+.has-product-modal:focus-visible {
+    outline: 2px solid var(--amber-dark);
+    outline-offset: 3px;
+}
+
+/* ---------- Floating WhatsApp button ---------- */
+.whatsapp-float {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #25D366;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible {
+    background-color: #1fb257;
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+.whatsapp-float svg {
+    flex-shrink: 0;
+}
+
+@media screen and (max-width: 640px) {
+    .product-modal-panel {
+        grid-template-columns: 1fr;
+        padding: 22px;
+    }
+    .product-modal-img {
+        height: 180px;
+    }
+    .whatsapp-float span {
+        display: none;
+    }
+    .whatsapp-float {
+        padding: 14px;
+        right: 16px;
+        bottom: 16px;
+    }
+}
+
+/* ---------- View Details link on product cards ---------- */
+.view-details-link {
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 2px 0 10px;
+    color: var(--amber-dark);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+}
+.view-details-link:hover,
+.view-details-link:focus-visible {
+    color: var(--navy);
+}
+body.dark .view-details-link {
+    color: var(--gold);
+}
+body.dark .view-details-link:hover,
+body.dark .view-details-link:focus-visible {
+    color: var(--gold-light);
 }

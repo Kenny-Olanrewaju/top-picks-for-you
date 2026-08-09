@@ -536,6 +536,183 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ---------- WhatsApp integration ----------
+    // IMPORTANT: replace this with the store's real WhatsApp Business number,
+    // in international format, digits only (no "+", no leading 0).
+    // Example: a Nigerian number 080-XXX-XXXX becomes "234XXXXXXXXXX".
+    const WHATSAPP_NUMBER = '234XXXXXXXXXX';
+
+    function buildWhatsAppLink(message) {
+        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    }
+
+    function formatPriceForMessage(price, currency) {
+        return getFormatter(currency)(Number(price));
+    }
+
+    function generateProductDescription(name, price, currency) {
+        const lower = name.toLowerCase();
+        let opener;
+        if (/(bag|backpack|wallet|belt|clutch|holder)/.test(lower)) {
+            opener = `Crafted for everyday carry, the ${name} pairs clean lines with materials built to last.`;
+        } else if (/(sneaker|shoe|boot|sandal|pump|mule)/.test(lower)) {
+            opener = `Step out in the ${name} — a silhouette that moves comfortably from daytime errands to nights out.`;
+        } else if (/(jacket|coat|blazer|vest|cardigan|windrunner)/.test(lower)) {
+            opener = `Layer up with the ${name}, a versatile piece that adds structure and warmth to any fit.`;
+        } else if (/(hoodie|sweatshirt|sweater|crewneck|fleece)/.test(lower)) {
+            opener = `The ${name} is soft, easy to wear, and built for cozy everyday rotation.`;
+        } else if (/(jean|trouser|pant|chino|jogger|short|legging)/.test(lower)) {
+            opener = `The ${name} offers a comfortable, tailored fit that moves with you through the day.`;
+        } else if (/(sunglasses|glasses)/.test(lower)) {
+            opener = `Finish your look with the ${name}, a statement accessory with everyday wearability.`;
+        } else if (/(bracelet|necklace|ring|pen|cap|hat|beanie|scarf)/.test(lower)) {
+            opener = `The ${name} is a small detail with a big impact, perfect for adding polish to any outfit.`;
+        } else if (/(tee|shirt|polo|dress|skirt)/.test(lower)) {
+            opener = `The ${name} is a wardrobe staple made from quality fabric, designed to fit effortlessly into your rotation.`;
+        } else {
+            opener = `The ${name} is a carefully selected piece made for everyday style and lasting quality.`;
+        }
+        const priceText = formatPriceForMessage(price, currency);
+        return `${opener} Priced at ${priceText}, and ready to ship as soon as you check out.`;
+    }
+
+    function ensureProductModal() {
+        let overlay = document.getElementById('productModalOverlay');
+        if (overlay) return overlay;
+
+        overlay = document.createElement('div');
+        overlay.id = 'productModalOverlay';
+        overlay.className = 'modal-overlay product-modal-overlay';
+        overlay.style.display = 'none';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-labelledby', 'productModalTitle');
+        overlay.innerHTML = `
+            <div class="modal-panel product-modal-panel">
+                <button type="button" class="product-modal-close" id="productModalClose" aria-label="Close product details">&times;</button>
+                <img id="productModalImg" src="" alt="" class="product-modal-img">
+                <div class="product-modal-info">
+                    <h2 id="productModalTitle"></h2>
+                    <p class="product-modal-price" id="productModalPrice"></p>
+                    <p class="product-modal-desc" id="productModalDesc"></p>
+                    <div class="product-modal-actions">
+                        <button type="button" class="btn" id="productModalAddToCart">Add to Cart</button>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="btn whatsapp-btn" id="productModalWhatsapp">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.7c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.6-.3-1.3-.6-1.8-1.2-.5-.5-.8-1-.9-1.2s0-.4.1-.5c.1-.1.2-.3.4-.4.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5s-.5-1.2-.7-1.7c-.2-.4-.4-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.8 4.5 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3Z" fill="currentColor"/></svg>
+                            Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>`;
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) closeProductModal();
+        });
+        document.getElementById('productModalClose').addEventListener('click', closeProductModal);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && overlay.style.display !== 'none') closeProductModal();
+        });
+
+        return overlay;
+    }
+
+    function closeProductModal() {
+        const overlay = document.getElementById('productModalOverlay');
+        if (overlay) overlay.style.display = 'none';
+    }
+
+    function openProductModal(card) {
+        const cardAddBtn = card.querySelector('.add-to-cart');
+        if (!cardAddBtn) return;
+
+        const overlay = ensureProductModal();
+        const name = cardAddBtn.dataset.name || card.querySelector('h3')?.textContent || 'This item';
+        const price = Number(cardAddBtn.dataset.price) || 0;
+        const currency = cardAddBtn.dataset.currency || 'USD';
+        const imgSrc = card.querySelector('img')?.src || cardAddBtn.dataset.img || '';
+        const priceText = card.querySelector('.price')?.textContent.trim() || formatPriceForMessage(price, currency);
+
+        document.getElementById('productModalImg').src = imgSrc;
+        document.getElementById('productModalImg').alt = name;
+        document.getElementById('productModalTitle').textContent = name;
+        document.getElementById('productModalPrice').textContent = priceText;
+        document.getElementById('productModalDesc').textContent = generateProductDescription(name, price, currency);
+
+        const modalAddBtn = document.getElementById('productModalAddToCart');
+        modalAddBtn.onclick = function () {
+            cardAddBtn.click();
+            closeProductModal();
+        };
+
+        const whatsappBtn = document.getElementById('productModalWhatsapp');
+        const message = `Hi, I'm interested in purchasing the ${priceText} ${name}`;
+        whatsappBtn.href = buildWhatsAppLink(message);
+
+        overlay.style.display = 'grid';
+    }
+
+    function setupProductModals() {
+        document.querySelectorAll('.product-card').forEach((card) => {
+            if (card.dataset.modalBound) return;
+            card.dataset.modalBound = 'true';
+            card.classList.add('has-product-modal');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            const name = card.querySelector('.add-to-cart')?.dataset.name || card.querySelector('h3')?.textContent || 'product';
+            card.setAttribute('aria-label', `View details for ${name}`);
+
+            // Visible trigger so people notice the card opens a details view,
+            // instead of relying on them discovering it's clickable.
+            const cardBody = card.querySelector('.card-body');
+            if (cardBody && !cardBody.querySelector('.view-details-link')) {
+                const viewDetailsBtn = document.createElement('button');
+                viewDetailsBtn.type = 'button';
+                viewDetailsBtn.className = 'view-details-link';
+                viewDetailsBtn.textContent = 'View Details';
+                viewDetailsBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    openProductModal(card);
+                });
+                const addBtn = cardBody.querySelector('.add-to-cart');
+                if (addBtn) {
+                    addBtn.insertAdjacentElement('beforebegin', viewDetailsBtn);
+                } else {
+                    cardBody.appendChild(viewDetailsBtn);
+                }
+            }
+
+            card.addEventListener('click', function (e) {
+                if (e.target.closest('.add-to-cart')) return;
+                openProductModal(card);
+            });
+            card.addEventListener('keydown', function (e) {
+                if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.add-to-cart')) {
+                    e.preventDefault();
+                    openProductModal(card);
+                }
+            });
+        });
+    }
+
+    function injectWhatsappFloatButton() {
+        if (document.getElementById('whatsappFloatBtn')) return;
+        const link = document.createElement('a');
+        link.id = 'whatsappFloatBtn';
+        link.className = 'whatsapp-float';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', 'Chat with us on WhatsApp');
+        link.href = buildWhatsAppLink("Hi, I'd like some help with an order from Top Picks For You.");
+        link.innerHTML = `
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.7c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.6-.3-1.3-.6-1.8-1.2-.5-.5-.8-1-.9-1.2s0-.4.1-.5c.1-.1.2-.3.4-.4.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5s-.5-1.2-.7-1.7c-.2-.4-.4-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.8 4.5 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3Z" fill="currentColor"/></svg>
+            <span>Chat with us</span>`;
+        document.body.appendChild(link);
+    }
+
+    setupProductModals();
+    injectWhatsappFloatButton();
+
     function updateShopPreview() {
         const query = shopMoreSearch?.value.trim().toLowerCase() || '';
         const activeCategory = document.querySelector('.category-button.active')?.dataset.filter || 'all';
